@@ -1,0 +1,726 @@
+if game.GameId == 111958650 then
+
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "Advancer Z (Arsenal) (V 1.6)",
+   Icon = 1, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+   LoadingTitle = "Advancer Z Load",
+   LoadingSubtitle = "UI Lib by Sirius   Script by VPX The_EinsteinV2 on Discord",
+   Theme = "Amethyst", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+
+   DisableRayfieldPrompts = false,
+   DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
+
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = "AdvanceZ", -- Create a custom folder for your hub/game
+      FileName = "Save"
+   },
+
+   Discord = {
+      Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+
+   KeySystem = true, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Advancer Z",
+      Subtitle = "Key System",
+      Note = "The key is Advance", -- Use this to tell the user how to get a key
+      FileName = "KeySys", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"Hell", "IamAdmin", "IamOwnerBiches", "Advance", "IDK", "idk", "Idk", "bro.", "bro", "Bro", "Bro.", "bruh", "BRO"} 
+   }
+})
+
+local Tab = Window:CreateTab("Main Stuff", 4483362458) -- Title, Image
+
+local ADMSection = Tab:CreateSection("Admin Scripts")
+
+local IYButton = Tab:CreateButton({
+   Name = "Execute Infinite Yield (Admin Commands)",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/edgeiy/infiniteyield/master/source",true))()
+   end,
+})
+
+local VisualSection = Tab:CreateSection("Visuals")
+
+local Esp = Tab:CreateButton({
+   Name = "Player ESP (TeamCheck On)",
+   Callback = function()
+    BoxOutline.Visible = false
+    Box.Visible = false
+    wait(0.5)
+local lplr = game.Players.LocalPlayer
+local camera = game:GetService("Workspace").CurrentCamera
+local CurrentCamera = workspace.CurrentCamera
+local worldToViewportPoint = CurrentCamera.worldToViewportPoint
+
+local HeadOff = Vector3.new(0, 0.5, 0)
+local LegOff = Vector3.new(0,3,0)
+
+for i,v in pairs(game.Players:GetChildren()) do
+    local BoxOutline = Drawing.new("Square")
+    BoxOutline.Visible = false
+    BoxOutline.Color = Color3.new(0,0,0)
+    BoxOutline.Thickness = 1
+    BoxOutline.Transparency = 1
+    BoxOutline.Filled = false
+
+    local Box = Drawing.new("Square")
+    Box.Visible = false
+    Box.Color = Color3.new(1,1,1)
+    Box.Thickness = 3
+    Box.Transparency = 1
+    Box.Filled = false
+
+    function boxesp()
+        game:GetService("RunService").RenderStepped:Connect(function()
+            if v.Character ~= nil and v.Character:FindFirstChild("Humanoid") ~= nil and v.Character:FindFirstChild("HumanoidRootPart") ~= nil and v ~= lplr and v.Character.Humanoid.Health > 0 then
+                local Vector, onScreen = camera:worldToViewportPoint(v.Character.HumanoidRootPart.Position)
+
+                local RootPart = v.Character.HumanoidRootPart
+                local Head = v.Character.Head
+                local RootPosition, RootVis = worldToViewportPoint(CurrentCamera, RootPart.Position)
+                local HeadPosition = worldToViewportPoint(CurrentCamera, Head.Position + HeadOff)
+                local LegPosition = worldToViewportPoint(CurrentCamera, RootPart.Position - LegOff)
+
+                if onScreen then
+                    BoxOutline.Size = Vector2.new(1000 / RootPosition.Z, HeadPosition.Y - LegPosition.Y)
+                    BoxOutline.Position = Vector2.new(RootPosition.X - BoxOutline.Size.X / 2, RootPosition.Y - BoxOutline.Size.Y / 2)
+                    BoxOutline.Visible = true
+
+                    Box.Size = Vector2.new(3000 / RootPosition.Z, HeadPosition.Y - LegPosition.Y)
+                    Box.Position = Vector2.new(RootPosition.X - Box.Size.X / 2, RootPosition.Y - Box.Size.Y / 2)
+                    Box.Visible = true
+
+                    if v.TeamColor == lplr.TeamColor then
+                        BoxOutline.Visible = false
+                        Box.Visible = false
+                    else
+                        BoxOutline.Visible = true
+                        Box.Visible = true
+                    end
+
+                else
+                    BoxOutline.Visible = false
+                    Box.Visible = false
+                end
+            else
+                BoxOutline.Visible = false
+                Box.Visible = false
+            end
+        end)
+    end
+    coroutine.wrap(boxesp)()
+end
+
+game.Players.PlayerAdded:Connect(function(v)
+    local BoxOutline = Drawing.new("Square")
+    BoxOutline.Visible = false
+    BoxOutline.Color = Color3.new(0,0,0)
+    BoxOutline.Thickness = 3
+    BoxOutline.Transparency = 1
+    BoxOutline.Filled = false
+
+    local Box = Drawing.new("Square")
+    Box.Visible = false
+    Box.Color = Color3.new(1,1,1)
+    Box.Thickness = 1
+    Box.Transparency = 1
+    Box.Filled = false
+
+    function boxesp()
+        game:GetService("RunService").RenderStepped:Connect(function()
+            if v.Character ~= nil and v.Character:FindFirstChild("Humanoid") ~= nil and v.Character:FindFirstChild("HumanoidRootPart") ~= nil and v ~= lplr and v.Character.Humanoid.Health > 0 then
+                local Vector, onScreen = camera:worldToViewportPoint(v.Character.HumanoidRootPart.Position)
+
+                local RootPart = v.Character.HumanoidRootPart
+                local Head = v.Character.Head
+                local RootPosition, RootVis = worldToViewportPoint(CurrentCamera, RootPart.Position)
+                local HeadPosition = worldToViewportPoint(CurrentCamera, Head.Position + HeadOff)
+                local LegPosition = worldToViewportPoint(CurrentCamera, RootPart.Position - LegOff)
+
+                if onScreen then
+                    BoxOutline.Size = Vector2.new(1000 / RootPosition.Z, HeadPosition.Y - LegPosition.Y)
+                    BoxOutline.Position = Vector2.new(RootPosition.X - BoxOutline.Size.X / 2, RootPosition.Y - BoxOutline.Size.Y / 2)
+                    BoxOutline.Visible = true
+
+                    Box.Size = Vector2.new(3000 / RootPosition.Z, HeadPosition.Y - LegPosition.Y)
+                    Box.Position = Vector2.new(RootPosition.X - Box.Size.X / 2, RootPosition.Y - Box.Size.Y / 2)
+                    Box.Visible = true
+
+                    if v.TeamColor == lplr.TeamColor then
+                        BoxOutline.Visible = false
+                        Box.Visible = false
+                    else
+                        BoxOutline.Visible = true
+                        Box.Visible = true
+                    end
+
+                else
+                    BoxOutline.Visible = false
+                    Box.Visible = false
+                end
+            else
+                BoxOutline.Visible = false
+                Box.Visible = false
+            end
+        end)
+    end
+    coroutine.wrap(boxesp)()
+end)
+end,
+})
+
+local Esp2 = Tab:CreateButton({
+   Name = "Player ESP (TeamCheck Off)",
+   Callback = function()
+    BoxOutline.Visible = false
+    Box.Visible = false
+    wait(0.5)
+local lplr = game.Players.LocalPlayer
+local camera = game:GetService("Workspace").CurrentCamera
+local CurrentCamera = workspace.CurrentCamera
+local worldToViewportPoint = CurrentCamera.worldToViewportPoint
+
+local HeadOff = Vector3.new(0, 0.5, 0)
+local LegOff = Vector3.new(0,3,0)
+
+for i,v in pairs(game.Players:GetChildren()) do
+    local BoxOutline = Drawing.new("Square")
+    BoxOutline.Visible = false
+    BoxOutline.Color = Color3.new(0,0,0)
+    BoxOutline.Thickness = 1
+    BoxOutline.Transparency = 1
+    BoxOutline.Filled = false
+
+    local Box = Drawing.new("Square")
+    Box.Visible = false
+    Box.Color = Color3.new(1,1,1)
+    Box.Thickness = 3
+    Box.Transparency = 1
+    Box.Filled = false
+
+    function boxesp()
+        game:GetService("RunService").RenderStepped:Connect(function()
+            if v.Character ~= nil and v.Character:FindFirstChild("Humanoid") ~= nil and v.Character:FindFirstChild("HumanoidRootPart") ~= nil and v ~= lplr and v.Character.Humanoid.Health > 0 then
+                local Vector, onScreen = camera:worldToViewportPoint(v.Character.HumanoidRootPart.Position)
+
+                local RootPart = v.Character.HumanoidRootPart
+                local Head = v.Character.Head
+                local RootPosition, RootVis = worldToViewportPoint(CurrentCamera, RootPart.Position)
+                local HeadPosition = worldToViewportPoint(CurrentCamera, Head.Position + HeadOff)
+                local LegPosition = worldToViewportPoint(CurrentCamera, RootPart.Position - LegOff)
+
+                if onScreen then
+                    BoxOutline.Size = Vector2.new(1000 / RootPosition.Z, HeadPosition.Y - LegPosition.Y)
+                    BoxOutline.Position = Vector2.new(RootPosition.X - BoxOutline.Size.X / 2, RootPosition.Y - BoxOutline.Size.Y / 2)
+                    BoxOutline.Visible = true
+
+                    Box.Size = Vector2.new(3000 / RootPosition.Z, HeadPosition.Y - LegPosition.Y)
+                    Box.Position = Vector2.new(RootPosition.X - Box.Size.X / 2, RootPosition.Y - Box.Size.Y / 2)
+                    Box.Visible = true
+
+                    if v.TeamColor == lplr.TeamColor then
+                        BoxOutline.Visible = true
+                        Box.Visible = true
+                    else
+                        BoxOutline.Visible = true
+                        Box.Visible = true
+                    end
+
+                else
+                    BoxOutline.Visible = false
+                    Box.Visible = false
+                end
+            else
+                BoxOutline.Visible = false
+                Box.Visible = false
+            end
+        end)
+    end
+    coroutine.wrap(boxesp)()
+end
+
+game.Players.PlayerAdded:Connect(function(v)
+    local BoxOutline = Drawing.new("Square")
+    BoxOutline.Visible = false
+    BoxOutline.Color = Color3.new(0,0,0)
+    BoxOutline.Thickness = 3
+    BoxOutline.Transparency = 1
+    BoxOutline.Filled = false
+
+    local Box = Drawing.new("Square")
+    Box.Visible = false
+    Box.Color = Color3.new(1,1,1)
+    Box.Thickness = 1
+    Box.Transparency = 1
+    Box.Filled = false
+
+    function boxesp()
+        game:GetService("RunService").RenderStepped:Connect(function()
+            if v.Character ~= nil and v.Character:FindFirstChild("Humanoid") ~= nil and v.Character:FindFirstChild("HumanoidRootPart") ~= nil and v ~= lplr and v.Character.Humanoid.Health > 0 then
+                local Vector, onScreen = camera:worldToViewportPoint(v.Character.HumanoidRootPart.Position)
+
+                local RootPart = v.Character.HumanoidRootPart
+                local Head = v.Character.Head
+                local RootPosition, RootVis = worldToViewportPoint(CurrentCamera, RootPart.Position)
+                local HeadPosition = worldToViewportPoint(CurrentCamera, Head.Position + HeadOff)
+                local LegPosition = worldToViewportPoint(CurrentCamera, RootPart.Position - LegOff)
+
+                if onScreen then
+                    BoxOutline.Size = Vector2.new(1000 / RootPosition.Z, HeadPosition.Y - LegPosition.Y)
+                    BoxOutline.Position = Vector2.new(RootPosition.X - BoxOutline.Size.X / 2, RootPosition.Y - BoxOutline.Size.Y / 2)
+                    BoxOutline.Visible = true
+
+                    Box.Size = Vector2.new(3000 / RootPosition.Z, HeadPosition.Y - LegPosition.Y)
+                    Box.Position = Vector2.new(RootPosition.X - Box.Size.X / 2, RootPosition.Y - Box.Size.Y / 2)
+                    Box.Visible = true
+
+                    if v.TeamColor == lplr.TeamColor then
+                        BoxOutline.Visible = true
+                        Box.Visible = true
+                    else
+                        BoxOutline.Visible = true
+                        Box.Visible = true
+                    end
+
+                else
+                    BoxOutline.Visible = false
+                    Box.Visible = false
+                end
+            else
+                BoxOutline.Visible = false
+                Box.Visible = false
+            end
+        end)
+    end
+    coroutine.wrap(boxesp)()
+end)
+end,
+})
+
+local MainSection = Tab:CreateSection("Arsenal Things")
+
+local Button = Tab:CreateButton({
+   Name = "Silent Aim",
+   Callback = function()
+   
+   end,
+})
+
+local AmmoButton = Tab:CreateButton({
+   Name = "Infinite Ammo",
+   Callback = function()
+    local replicationstorage = game.ReplicatedStorage
+
+while wait() do
+    game:GetService("Players").LocalPlayer.PlayerGui.GUI.Client.Variables.ammocount.Value = 999
+    game:GetService("Players").LocalPlayer.PlayerGui.GUI.Client.Variables.ammocount2.Value = 999
+end
+
+   end,
+})
+
+local RecoilButton = Tab:CreateButton({
+   Name = "No Recoil",
+   Callback = function()
+    	local replicationstorage = game.ReplicatedStorage
+ 
+	while wait(5) do
+		
+	for i, v in pairs(replicationstorage.Weapons:GetDescendants()) do
+		if v.Name == "RecoilControl" then
+			v.Value = 0
+		end
+		if v.Name == "MaxSpread" then
+			v.Value = 0
+		end
+    end
+end
+
+   end,
+})
+
+local FRButton = Tab:CreateButton({
+   Name = "Firerate Mod",
+   Callback = function()
+	local replicationstorage = game.ReplicatedStorage
+ 
+	while wait(5) do
+		
+	for i, v in pairs(replicationstorage.Weapons:GetDescendants()) do
+		if v.Name == "Auto" then
+			v.Value = true
+		end
+		if v.Name == "FireRate" then
+			v.Value = 0.02
+		end
+	end
+end
+
+   end,
+})
+
+elseif game.GameId == 4948814458 then
+
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "Advancer Z (Fortline) (V 1.6)",
+   Icon = 1, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+   LoadingTitle = "Advancer Z Load",
+   LoadingSubtitle = "UI Lib by Sirius   Script by VPX The_EinsteinV2 on Discord",
+   Theme = "Amethyst", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+
+   DisableRayfieldPrompts = false,
+   DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
+
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = "AdvanceZ", -- Create a custom folder for your hub/game
+      FileName = "Save"
+   },
+
+   Discord = {
+      Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+
+   KeySystem = true, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Advancer Z",
+      Subtitle = "Key System",
+      Note = "The key is Advance", -- Use this to tell the user how to get a key
+      FileName = "KeySys", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"Hell", "IamAdmin", "IamOwnerBiches", "Advance", "IDK", "idk", "Idk", "bro.", "bro", "Bro", "Bro.", "bruh", "BRO"} 
+   }
+})
+
+
+
+local Tab = Window:CreateTab("Main Stuff", 4483362458) -- Title, Image
+
+local ADMSection = Tab:CreateSection("Admin Scripts")
+
+local IYButton = Tab:CreateButton({
+   Name = "Execute Infinite Yield (Admin Commands)",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/edgeiy/infiniteyield/master/source",true))()
+   end,
+})
+
+local VisualSection = Tab:CreateSection("Visuals")
+
+local Esp = Tab:CreateButton({
+   Name = "Player ESP",
+   Callback = function()
+local lplr = game.Players.LocalPlayer
+local camera = game:GetService("Workspace").CurrentCamera
+local CurrentCamera = workspace.CurrentCamera
+local worldToViewportPoint = CurrentCamera.worldToViewportPoint
+
+local HeadOff = Vector3.new(0, 0.5, 0)
+local LegOff = Vector3.new(0,3,0)
+
+for i,v in pairs(game.Players:GetChildren()) do
+    local BoxOutline = Drawing.new("Square")
+    BoxOutline.Visible = false
+    BoxOutline.Color = Color3.new(0,0,0)
+    BoxOutline.Thickness = 1
+    BoxOutline.Transparency = 1
+    BoxOutline.Filled = false
+
+    local Box = Drawing.new("Square")
+    Box.Visible = false
+    Box.Color = Color3.new(1,1,1)
+    Box.Thickness = 3
+    Box.Transparency = 1
+    Box.Filled = false
+
+    function boxesp()
+        game:GetService("RunService").RenderStepped:Connect(function()
+            if v.Character ~= nil and v.Character:FindFirstChild("Humanoid") ~= nil and v.Character:FindFirstChild("HumanoidRootPart") ~= nil and v ~= lplr and v.Character.Humanoid.Health > 0 then
+                local Vector, onScreen = camera:worldToViewportPoint(v.Character.HumanoidRootPart.Position)
+
+                local RootPart = v.Character.HumanoidRootPart
+                local Head = v.Character.Head
+                local RootPosition, RootVis = worldToViewportPoint(CurrentCamera, RootPart.Position)
+                local HeadPosition = worldToViewportPoint(CurrentCamera, Head.Position + HeadOff)
+                local LegPosition = worldToViewportPoint(CurrentCamera, RootPart.Position - LegOff)
+
+                if onScreen then
+                    BoxOutline.Size = Vector2.new(1000 / RootPosition.Z, HeadPosition.Y - LegPosition.Y)
+                    BoxOutline.Position = Vector2.new(RootPosition.X - BoxOutline.Size.X / 2, RootPosition.Y - BoxOutline.Size.Y / 2)
+                    BoxOutline.Visible = true
+
+                    Box.Size = Vector2.new(3000 / RootPosition.Z, HeadPosition.Y - LegPosition.Y)
+                    Box.Position = Vector2.new(RootPosition.X - Box.Size.X / 2, RootPosition.Y - Box.Size.Y / 2)
+                    Box.Visible = true
+
+                    if v.TeamColor == lplr.TeamColor then
+                        BoxOutline.Visible = true
+                        Box.Visible = true
+                    else
+                        BoxOutline.Visible = true
+                        Box.Visible = true
+                    end
+
+                else
+                    BoxOutline.Visible = false
+                    Box.Visible = false
+                end
+            else
+                BoxOutline.Visible = false
+                Box.Visible = false
+            end
+        end)
+    end
+    coroutine.wrap(boxesp)()
+end
+
+game.Players.PlayerAdded:Connect(function(v)
+    local BoxOutline = Drawing.new("Square")
+    BoxOutline.Visible = false
+    BoxOutline.Color = Color3.new(0,0,0)
+    BoxOutline.Thickness = 3
+    BoxOutline.Transparency = 1
+    BoxOutline.Filled = false
+
+    local Box = Drawing.new("Square")
+    Box.Visible = false
+    Box.Color = Color3.new(1,1,1)
+    Box.Thickness = 1
+    Box.Transparency = 1
+    Box.Filled = false
+
+    function boxesp()
+        game:GetService("RunService").RenderStepped:Connect(function()
+            if v.Character ~= nil and v.Character:FindFirstChild("Humanoid") ~= nil and v.Character:FindFirstChild("HumanoidRootPart") ~= nil and v ~= lplr and v.Character.Humanoid.Health > 0 then
+                local Vector, onScreen = camera:worldToViewportPoint(v.Character.HumanoidRootPart.Position)
+
+                local RootPart = v.Character.HumanoidRootPart
+                local Head = v.Character.Head
+                local RootPosition, RootVis = worldToViewportPoint(CurrentCamera, RootPart.Position)
+                local HeadPosition = worldToViewportPoint(CurrentCamera, Head.Position + HeadOff)
+                local LegPosition = worldToViewportPoint(CurrentCamera, RootPart.Position - LegOff)
+
+                if onScreen then
+                    BoxOutline.Size = Vector2.new(1000 / RootPosition.Z, HeadPosition.Y - LegPosition.Y)
+                    BoxOutline.Position = Vector2.new(RootPosition.X - BoxOutline.Size.X / 2, RootPosition.Y - BoxOutline.Size.Y / 2)
+                    BoxOutline.Visible = true
+
+                    Box.Size = Vector2.new(3000 / RootPosition.Z, HeadPosition.Y - LegPosition.Y)
+                    Box.Position = Vector2.new(RootPosition.X - Box.Size.X / 2, RootPosition.Y - Box.Size.Y / 2)
+                    Box.Visible = true
+
+                    if v.TeamColor == lplr.TeamColor then
+                        BoxOutline.Visible = false
+                        Box.Visible = false
+                    else
+                        BoxOutline.Visible = true
+                        Box.Visible = true
+                    end
+
+                else
+                    BoxOutline.Visible = false
+                    Box.Visible = false
+                end
+            else
+                BoxOutline.Visible = false
+                Box.Visible = false
+            end
+        end)
+    end
+    coroutine.wrap(boxesp)()
+end)
+end,
+})
+
+local MainSection = Tab:CreateSection("Fortline Things")
+
+local Button = Tab:CreateButton({
+   Name = "Kill All",
+   Callback = function()
+   for i,v in pairs(game.Players:GetPlayers()) do
+   if v ~= game.Players.LocalPlayer then
+   pcall(function()
+   local target = v.Character.Head
+   game:GetService("ReplicatedStorage"):WaitForChild("WeaponsSystem"):WaitForChild("Network"):WaitForChild("WeaponHit"):FireServer(game.Players.LocalPlayer.Backpack.RocketLauncher,{p=target.Position,pid=0,part=target,d=0,maxDist=0,h=target,m=Enum.Material.Concrete,n=Vector3.zero,t=0,sid=0})
+   end)
+   end
+   end
+   end,
+})
+local Button2 = Tab:CreateButton({
+   Name = "LoopKill All",
+   Callback = function()
+   while task.wait() do
+   for i,v in pairs(game.Players:GetPlayers()) do
+   if v ~= game.Players.LocalPlayer then
+   pcall(function()
+   local target = v.Character.Head
+   game:GetService("ReplicatedStorage"):WaitForChild("WeaponsSystem"):WaitForChild("Network"):WaitForChild("WeaponHit"):FireServer(game.Players.LocalPlayer.Backpack.RocketLauncher,{p=target.Position,pid=0,part=target,d=0,maxDist=0,h=target,m=Enum.Material.Concrete,n=Vector3.zero,t=0,sid=0})
+   end)
+   end
+   end
+   end
+   end,
+})
+local Input = Tab:CreateInput({
+   Name = "Kill Player",
+   CurrentValue = "",
+   PlaceholderText = "Name",
+   RemoveTextAfterFocusLost = false,
+   Flag = "Input1",
+   Callback = function(Text)
+   local target = game.Players:FindFirstChild(Text).Character.Head
+   game:GetService("ReplicatedStorage"):WaitForChild("WeaponsSystem"):WaitForChild("Network"):WaitForChild("WeaponHit"):FireServer(game.Players.LocalPlayer.Backpack.RocketLauncher,{p=target.Position,pid=0,part=target,d=0,maxDist=0,h=target,m=Enum.Material.Concrete,n=Vector3.zero,t=0,sid=0})
+   end,
+})
+local Input2 = Tab:CreateInput({
+   Name = "LoopKill Player",
+   CurrentValue = "",
+   PlaceholderText = "Name",
+   RemoveTextAfterFocusLost = false,
+   Flag = "Input2",
+   Callback = function(Text)
+   while task.wait() do
+   local target = game.Players:FindFirstChild(Text).Character.Head
+   game:GetService("ReplicatedStorage"):WaitForChild("WeaponsSystem"):WaitForChild("Network"):WaitForChild("WeaponHit"):FireServer(game.Players.LocalPlayer.Backpack.RocketLauncher,{p=target.Position,pid=0,part=target,d=0,maxDist=0,h=target,m=Enum.Material.Concrete,n=Vector3.zero,t=0,sid=0})
+   end
+   end,
+})
+
+local function getplrsname()
+    for i, v in pairs(game:GetChildren()) do
+        if v.ClassName == "Players" then
+            return v.Name
+        end
+    end
+end
+
+local SilentEnabled = false
+
+local function enableSilentAim()
+    SilentEnabled = not SilentEnabled
+    if SilentEnabled then
+        local players = getplrsname()
+        local plr = game[players].LocalPlayer
+
+        coroutine.resume(coroutine.create(function()
+            while SilentEnabled and wait(1) do
+                coroutine.resume(coroutine.create(function()
+                    for _, v in pairs(game[players]:GetPlayers()) do
+                        if v.Name ~= plr.Name and v.Character then
+                            v.Character.RightUpperLeg.CanCollide = false
+                            v.Character.RightUpperLeg.Transparency = 10
+                            v.Character.RightUpperLeg.Size = Vector3.new(17, 17, 17)
+
+                            v.Character.LeftUpperLeg.CanCollide = false
+                            v.Character.LeftUpperLeg.Transparency = 10
+                            v.Character.LeftUpperLeg.Size = Vector3.new(17, 17, 17)
+
+                            if v.Character:FindFirstChild("HeadHB") then
+                                v.Character.HeadHB.CanCollide = false
+                                v.Character.HeadHB.Transparency = 10
+                                v.Character.HeadHB.Size = Vector3.new(20, 20, 20)
+                            end
+
+                            v.Character.HumanoidRootPart.CanCollide = false
+                            v.Character.HumanoidRootPart.Transparency = 10
+                            v.Character.HumanoidRootPart.Size = Vector3.new(17, 17, 17)
+                        end
+                    end
+                end))
+            end
+        end))
+    end
+end
+
+Tab:CreateButton({
+    Name = "Toggle Silent Aim",
+    Callback = function()
+        enableSilentAim()
+        Rayfield:Notify({
+            Title = SilentEnabled and "Silent Aim Enabled" or "Silent Aim Disabled",
+            Content = SilentEnabled and "Silent aim functionality has been activated." or "Silent aim functionality has been deactivated.",
+            Duration = 5,
+            Image = 4483362458
+        })
+    end
+})
+
+
+local Button4 = Tab:CreateButton({
+   Name = "God (One-Life)",
+   Callback = function()
+   while task.wait() do workspace.Safe.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame end
+   end,
+})
+local Button5 = Tab:CreateButton({
+   Name = "God (Permanent)",
+   Callback = function()
+   while task.wait() do pcall(function() workspace.Safe.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame end) end
+   end,
+})
+local Button6 = Tab:CreateButton({
+   Name = "Reset",
+   Callback = function()
+   game.Players.LocalPlayer.Character.Humanoid.Health = 0
+   end,
+})
+
+local PlayerTab = Window:CreateTab("LocalPlayer", 4483362458) -- Title, Image
+
+
+local SettingTab = Window:CreateTab("Settings", 4483362458) -- Title, Image
+
+local PlayerSection = PlayerTab:CreateSection("Player")
+
+PlayerTab:CreateSlider({
+    Name = "Adjust Speed",
+    Range = {16, 500},
+    Increment = 1,
+    Suffix = "Speed",
+    CurrentValue = 16,
+    Callback = function(Value)
+    wait(1)
+    wait(1)
+    local Walker = true
+    wait(0.6)
+    wait(1)
+    wait(1)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+    repeat until Walker == false
+   end,
+})
+
+local SettingSection = SettingTab:CreateSection("Settings")
+
+local CloseButton = SettingTab:CreateButton({
+   Name = "Close Advancer Z Entirelly",
+   Callback = function()
+    Rayfield:Destroy()
+     end,
+})
+
+local InfoTab = Window:CreateTab("Info", 4483362458)
+
+local Create = InfoTab:CreateLabel("Creators", 4483362458, Color3.fromRGB(1, 255, 255), false) -- Title, Icon, Color, IgnoreTheme
+
+local CreateLabel = InfoTab:CreateLabel("Script Made By VPX The_EinsteinV2 on Discord", 4483362458, Color3.fromRGB(255, 255, 255), false) -- Title, Icon, Color, IgnoreTheme
+
+local UILabel = InfoTab:CreateLabel("UI Library: Rayfield  Made by Sirius", 4483362458, Color3.fromRGB(255, 255, 255), false) -- Title, Icon, Color, IgnoreTheme
+
+local SilentLabel = InfoTab:CreateLabel("Silent Aim just expands peoples hitbox. BUT IT DOES WORK", 4483362458, Color3.fromRGB(255, 255, 255), false) -- Title, Icon, Color, IgnoreTheme
+
+end
