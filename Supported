@@ -1,0 +1,5 @@
+local suptext = "Hello Advancer Z User, i will show you a list of supported executors down below."
+local supmean = "If the circle is 🟢 Green   Then it means the Executor is supported and should work!"
+local midmean = "If the circle is 🟡Yellow      Then it means the executor maybe works or is unstable."
+local nomean = "If the circle is 🔴Red    Then the script will probably not work."
+ 
