@@ -1,5 +1,13 @@
 local suptext = "Hello Advancer Z User, i will show you a list of supported executors down below."
-local supmean = "If the circle is 🟢 Green   Then it means the Executor is supported and should work!"
-local midmean = "If the circle is 🟡Yellow      Then it means the executor maybe works or is unstable."
-local nomean = "If the circle is 🔴Red    Then the script will probably not work."
+local TESTEDWITH = "Advancer Z is tested with Wave and Xeno, all features should work on Xeno and Wave. (ALSO ALL OTHER LIKE SOLARA SHOULD WORK)"
+
+-- local supmean = "If the circle is 🟢 Green   Then it means the Executor is supported and should work!"
+-- local midmean = "If the circle is 🟡Yellow      Then it means the executor maybe works or is unstable."
+-- local nomean = "If the circle is 🔴Red    Then the script will probably not work."
  
+print(suptext)
+
+warn(TESTEDWITH)
+wait(0.5)
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Tech4MechHubDev/Advancer-Z/refs/heads/main/Main%20Source",true))()
